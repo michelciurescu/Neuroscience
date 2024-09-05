@@ -17,7 +17,7 @@ with open('MINDs.CT_MC_MD_ICVF.pkl', 'rb') as f:
 
 valid_indices = []
 
-# Determine the valid indices in valid_indices
+# Some matrices have NaNs even outside their diagonal - we delete those matrices 
 for n in range(len(datamind)):
     valid_count = 0
     for i in range(360):
