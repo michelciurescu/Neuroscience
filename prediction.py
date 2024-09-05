@@ -29,6 +29,7 @@ for n in range(len(datamind)):
 #predictions = []
 medians = []
 
+#Train the model per region, by taking each regional vector from each person
 def predi(i):
     x = []
     y = []
@@ -43,7 +44,7 @@ def predi(i):
     fold_predictions = []
     #correlations = []
     
-    for train_index, test_index in kf.split(X):
+    for train_index, test_index in kf.split(X): #in this case I applied the k-fold (k=10), just to check that everything is alright
         X_train, X_test = X[train_index], X[test_index]
         y_train, y_test = y[train_index], y[test_index]
         
@@ -60,7 +61,7 @@ def predi(i):
 if __name__ == '__main__':
     num_cpus = 3
     with Pool(num_cpus) as pool:
-        pool.map(predi, range(360))
+        pool.map(predi, range(360)) #we have 360 models, so we use the model 360 times
         results = pool.map(predi, range(360))
     # Separate the results into predictions and medians
     with open('results_AZI.txt', 'w') as f:
